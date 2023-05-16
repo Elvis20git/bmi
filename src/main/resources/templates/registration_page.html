@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://kit.fontawesome.com/e3503fcd42.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/signup.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>registration-page</title>
+</head>
+<body>
+<section class="home">
+
+    <header class="header">
+        <a href="#" class="logo"><i class="fa-solid fa-house-medical"></i></a>
+
+        <nav class="nav">
+            <a href="../static/index.html">Home</a>
+            <a href="../static/index.html">About</a>
+            <a href="../static/index.html">Menu</a>
+            <a href="../static/index.html">Reviews</a>
+            <a href="../static/index.html">Contact</a>
+
+        </nav>
+
+
+    </header>
+
+    <!-- <section class="home">-->
+    <div class="content">
+        <h2>B-M-I Test</h2>
+        <p>By maintaining a healthy weight and normal BMI you're likely to have fewer joint and muscle pains, more energy, better regulation of bodily fluids and blood pressure</p>
+        <a href="#">Get Started</a>
+
+    </div>
+
+    <div class="wrapper">
+        <div class='logreg-box'>
+            <div class="form-box login">
+
+    <div class="wrapper-login">
+        <h2>Sign_Up</h2>
+        <form  method="post" action="/register" th:object="${registerRequest}">
+            <div class="input-box">
+                <span class="icon"></span>
+                <input type="text"  name="login"required/> </br>
+                <label>login</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" name="email"required/></br>
+                <label>Email_ID</label>
+            </div>
+
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password"  name="password"required/></br>
+                <label>Password</label>
+            </div>
+
+            <div class="remember-forgot">
+                <label><input type="checkbox">Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Sign_up</button>
+            <div class="register-link">
+                <p>Already have an account? Login? <a href="/login">Login</a> </p>
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script module src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <div class="media-options">
+        <a href="#">
+            <i class='bx bxl-google'></i>
+            <span>SignUP With Google</span>
+        </a>
+        <a href="#">
+            <i class='bx bxl-facebook-circle' ></i>
+            <span>SignUp With Facebook</span>
+        </a>
+    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="box">-->
+    <!--  <h1>Register-page</h1>-->
+    <!--  <div class="form-box">-->
+
+    <!--  </div>-->
+    <!--</div>-->
+</section>
+</body>
+</html>

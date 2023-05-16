@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/signup.css">
+    <style>
+
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image:linear-gradient(#380036 , #0CBABA);
+            /*background: url(image/background.jpg) no-repeat;*/
+            /*background-size: cover;*/
+        }
+
+        .container{
+            max-width: 650px;
+            padding: 28px;
+            margin: 0 28px;
+            box-shadow: 0 15px 20px rgba(0,0,0,0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.2);
+        }
+        h2{
+            font-size: 26px;
+            font-weight: 600;
+            text-align: center;
+            color: white;
+            padding-bottom: 8px;
+            border-bottom: 1px solid silver;
+        }
+        .content{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+        .input-box{
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+            padding-bottom: 15px;
+            border: none;
+        }
+
+        .input-box:nth-child(2n){
+            justify-content: end;
+
+        }
+        .input-box label, .gender-title{
+            width: 95%;
+            color: white;
+            font-weight: bold;
+            margin: 5px 0;
+
+        }
+        .gender-title{
+            font-size: 16px;
+        }
+        .input-box input{
+            height: 40px;
+            width: 95%;
+            padding: 0 10px;
+            border-radius: 5px;
+            /*border: 1px solid #ccc;*/
+            border: none;
+            outline: none;
+        }
+        .input-box input:is(:focus, :valid){
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        .gender-category{
+            color: white;
+        }
+        .gender-category label{
+            padding: 0 20px 0 5px;
+            font-size: 14px;
+        }
+        .gender-category label, .gender-category input{
+            cursor: pointer;
+        }
+        .alert p{
+            font-size: 14px;
+            font-style: italic;
+            color: black;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        .alert a{
+            text-decoration: none;
+        }
+
+        .alert a:hover{
+            text-decoration: underline;
+        }
+
+        .button-container{
+            margin: 15px 0;
+        }
+        .button-container button{
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            display: block;
+            font-size: 20px;
+            color: #fff;
+            border: none;
+            background-image: linear-gradient(to right, #aa076b, #61045f) ;
+            border-radius: 40px;
+        }
+
+        .button-container button:hover{
+            background-image: linear-gradient(to right, #61045f, #aa076b) ;
+        }
+        @media (max-width: 600px) {
+            .container{
+                min-width: 280px;
+            }
+            .content{
+                max-height: 380px;
+                overflow: auto;
+            }
+            .input-box{
+                margin-bottom: 12px;
+                width: 100%;
+            }
+            .input-box:nth-child(2n){
+                justify-content: space-between;
+            }
+            .gender-category{
+                display: flex;
+                justify-content: space-between;
+                width: 60%;
+
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <form  th:action="@{/saveData}" th:object="${dataa}" method="post" enctype="multipart/form-data">
+        <h2>Registration Form</h2>
+        <div class="content">
+
+
+            <div class="input-box">
+                <label >First Name</label>
+                <input type="text" th:field="*{fname}" placeholder="First Name" name="fname" required>
+            </div>
+            <div class="input-box">
+                <label >Last Name</label>
+                <input type="text" th:field="*{lname}" placeholder="Last Name" name="lname" required>
+            </div>
+
+            <div class="input-box">
+                <label>Email</label>
+                <input type="email" th:field="*{email}" placeholder="Email" name="email" required>
+            </div>
+
+            <div class="input-box">
+                <label>Weight :</label>
+                <input type="number" th:field="*{weight}" name="weight" placeholder="Weight" maxlength="9">
+            </div>
+            <div class="input-box">
+                <label>Height :</label>
+                <input type="number" th:field="*{height}" name="height" placeholder="Height" maxlength="15">
+            </div>
+
+            <!--            <div class="input-box">-->
+            <!--                <label >Date Of Birth :</label>-->
+            <!--                <input type="date" name="date" placeholder="date">-->
+            <!--            </div>-->
+
+
+            <div class="input-box">
+                <label>Gender</label>
+                <input type="text" th:field="*{gender}" name="gender" placeholder="gender">
+
+            </div><br>
+            <div class="input-box">
+<!--                <label >User_Id</label>-->
+                <input type="hidden" th:field="*{user_id}" placeholder="First Name" name="fname" required>
+            </div>
+            <div class="input-box">
+                <!--                <label >Id</label>-->
+                <input hidden="hidden" th:field="*{id}" placeholder="id" name="id" required>
+            </div>
+        </div>
+
+        <div class="alert">
+            <p>By Clicking Sign Up, you agree to our <a href="#">Terms and Conditions</a><br>Terms & Conditions,
+                <a href="#"> Privacy Policy,</a> and <a href="#"> Cookies Policy.</a><br> You may receive Email
+                notification from us and can opt out at any time.</p>
+        </div>
+        <div class="button-container">
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

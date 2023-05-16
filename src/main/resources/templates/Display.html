@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Responsive Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/e3503fcd42.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e3503fcd42.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/styleee.css"/>
+    <style>
+
+        body{
+            /*margin:0;*/
+            /*padding:20px;*/
+            /*font-family: sans-serif;*/
+            margin-top: 70px;
+            position:relative;
+            width: 100%;
+            height: 100vh;
+            /*background-image: url(image/cup-coffee-with-pile-coffee-beans.jpg) ;*/
+            background: linear-gradient(#380036 , #0CBABA)no-repeat;
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+
+
+        }
+        .table{
+            width: 145%;
+            height: 10vh;
+            border-collapse: collapse;
+        }
+        .table td{
+            color: white;
+        }
+
+        .table td,.table th{
+            padding:12px 15px;
+            /*border:1px solid #ddd;*/
+            text-align: center;
+            font-size:16px;
+        }
+
+        .table th{
+            background-color: #0CBABA;
+            /*background: url(image/cup-coffee-with-pile-coffee-beans2.jpg) no-repeat;*/
+            color:#ffffff;
+        }
+
+        .table tbody tr:nth-child(even){
+            /*background-color: #f5f5f5;*/
+        }
+
+        /*responsive*/
+
+        @media(max-width: 500px){
+            .table thead{
+                display: none;
+            }
+
+            .table, .table tbody, .table tr, .table td{
+                display: block;
+                width: 100%;
+            }
+            .table tr{
+                margin-bottom:15px;
+            }
+            .table td{
+                text-align: right;
+                padding-left: 50%;
+                text-align: right;
+                position: relative;
+            }
+            .table td::before{
+                content: attr(data-label);
+                position: absolute;
+                left:0;
+                width: 50%;
+                padding-left:15px;
+                font-size:15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+        .search-bar{
+            width: 50%;
+            height: 50%;
+            max-width: 700px;
+            border: white;
+            align-items: center;
+            border-radius: 60px;
+            padding: 10px 20px;
+            background: transparent;
+            font-size: 20px;
+            color: white;
+        }
+        ::placeholder{
+            color: #cac7ff;
+        }
+        .search img{
+        width: 25px;
+    }
+        .search{
+            border: 0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background: #58629b;
+            cursor: pointer;
+        }
+        .clear{
+            width: 30px;
+            height: 35px;
+            background: #58629b;
+            border-radius: 20%;
+            border: 0;
+
+
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<form th:action="@{/datas}" >
+    <div >
+        <input type="text" class="search-bar" id="keyword" name="keyword" size="50" th:value="${keyword}" placeholder="Type to search..">
+        &nbsp;
+        <button type="submit" class="search" value="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        &nbsp;
+        <button type="button" class="clear" value="clear" id="btnClear" onclick="clearSearch()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div>&nbsp</div>
+    <div>&nbsp</div>
+
+<!--<div class="box">-->
+<!--<div class="search-box">-->
+<!--    <input type="text" id="keyword" name="keyword" th:value="${keyword}" placeholder="Type to search..">-->
+<!--&lt;!&ndash;    <input type="submit" th:value="search" />&ndash;&gt;-->
+
+<!--    <div class="search-icon">-->
+<!--        <i class="fas fa-search"></i>-->
+<!--    </div>-->
+<!--    <div class="cancel-icon">-->
+<!--        <i class="fas fa-times"></i>-->
+<!--&lt;!&ndash;        <input type="button" value="clear" id="btnClear" onclick="clearSearch()">&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="search-data">-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+<table class="table" >
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>User_Id</th>
+        <th>First_Name</th>
+        <th>Last_Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>Action</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="data: ${ListOfData}">
+        <tr>
+            <td th:text="${data.id}"></td>
+            <td th:text="${data.user_id}"></td>
+            <td th:text="${data.fname}"></td>
+            <td th:text="${data.lname}"></td>
+            <td th:text="${data.email}"></td>
+            <td th:text="${data.gender}"></td>
+            <td th:text="${data.weight}"></td>
+            <td th:text="${data.height}"></td>
+
+            <td>
+
+                <a th:href="@{/Updatedata/{id}(id=${data.id})}" style="color: lightblue"> Update <i class="fa-solid fa-pen-nib"></i> </a>
+                <a th:href="@{/Deletedata/{id}(id=${data.id})}" style="color: red"> Delete <i class="fa-solid fa-trash "></i> </a>
+
+            </td>
+
+        </tr>
+
+
+    </th:block>
+    </tbody>
+</table>
+<!--<script>-->
+<!--    const searchBox = document.querySelector(".search-box");-->
+<!--    const searchBtn = document.querySelector(".search-icon");-->
+<!--    const cancelBtn = document.querySelector(".cancel-icon");-->
+<!--    const searchInput = document.querySelector("input");-->
+<!--    const searchData = document.querySelector(".search-data");-->
+<!--    searchBtn.onclick =()=>{-->
+<!--        searchBox.classList.add("active");-->
+<!--        searchBtn.classList.add("active");-->
+<!--        searchInput.classList.add("active");-->
+<!--        cancelBtn.classList.add("active");-->
+<!--        searchInput.focus();-->
+<!--        if(searchInput.value != ""){-->
+<!--            var values = searchInput.value;-->
+<!--            searchData.classList.remove("active");-->
+<!--        }else{-->
+<!--            searchData.textContent = "";-->
+<!--        }-->
+<!--    }-->
+<!--    cancelBtn.onclick =()=>{-->
+<!--        searchBox.classList.remove("active");-->
+<!--        searchBtn.classList.remove("active");-->
+<!--        searchInput.classList.remove("active");-->
+<!--        cancelBtn.classList.remove("active");-->
+<!--        searchData.classList.toggle("active");-->
+<!--        searchInput.value = "";-->
+<!--    }-->
+<!--</script>-->
+<script type="text/javascript">
+    function clearSearch(){
+        window.location = "[[@{/datas}]]";
+    }
+</script>
+</form>
+</body>
+</html>
